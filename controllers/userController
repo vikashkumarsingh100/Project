@@ -1,0 +1,3 @@
+module.exports.data=function(req,res){
+    return res.render("../views/index");
+}
