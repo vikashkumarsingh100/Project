@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const data1=require("../controllers/userController")
-console.log("connected");
+// console.log("connected");
 router.get("/", data1.data);
 const posts=require('./posts')
-console.log(posts.get('/posts'))
+// console.log(posts.get('/posts'))
 router.use('/',posts)
 module.exports = router;
 
