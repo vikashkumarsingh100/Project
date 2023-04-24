@@ -1,3 +1,26 @@
+const users=require('../models/user')
+const express = require("express");
+
 module.exports.data=function(req,res){
+  
     return res.render("index");
+}
+module.exports.createSession=function(req,res){
+    return res.redirect('/')
+}
+
+module.exports.create=async function(req,res){
+    // console.log(req.body.password)
+user=await users.findOne({email:req.body.email})
+
+    if(user)
+    {
+        res.send('already a user')
+    }
+    else{
+        await users.create(req.body)
+    }
+   
+
+    return res.redirect('/sign-in')
 }

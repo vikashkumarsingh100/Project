@@ -1,5 +1,14 @@
 <link rel="stylesheet" href="index.css">
   
-    <h1>this is ejs</h1>
+<% if(locals.user){ %>
+    <h1>My name is <%= user.name %></h1>
+    <a href="/profile">profile</a>
+    <a href="/sign-out">signout</a>
+    <% }else{ %>
+        <a href="/sign-up">Sign up</a>
+        <a href="/sign-in">sign in</a>
+        <% } %>
+
+   
    
    

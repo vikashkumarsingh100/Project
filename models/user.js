@@ -1,14 +1,24 @@
 var mongoose=require('mongoose');
 
 mongoose.connect('mongodb://127.0.0.1:27017/test1').then((err)=>{
-if(err)
-{
-    return console.log(err)
-}
+// if(err)
+// {
+//     return console.log(err)
+// }
 console.log("connected123")
 })
+
 const user=new mongoose.Schema({
     name:{
+        type:String,
+        required:true
+    },
+    email:{
+        type:String,
+        required:true,
+       
+    },
+    password:{
         type:String,
         required:true
     }
