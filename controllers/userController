@@ -1,10 +1,18 @@
 const users=require('../models/user')
+const posts=require('../models/post')
 const express = require("express");
 
-module.exports.data=function(req,res){
-  
-    return res.render("index");
-}
+module.exports.data=async function(req,res){
+    // console.log(req.user)
+  if(req.user)
+  { var a=await posts.find().populate('user');
+  return res.render('index',{posts1:a})
+  }
+  console.log('comment')
+
+return res.render('index');}
+   
+
 module.exports.createSession=function(req,res){
     return res.redirect('/')
 }
@@ -23,4 +31,15 @@ user=await users.findOne({email:req.body.email})
    
 
     return res.redirect('/sign-in')
+}
+module.exports.post=async function(req,res){
+    await posts.create(
+        {content:req.body.content,user:req.user._id});
+        var comment=await posts.find({user:req.user._id})
+
+         var a=await posts.find().populate('user');
+  return res.render('index',{posts1:a})
+  
+        // console.log(comment)
+   
 }

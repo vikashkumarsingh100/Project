@@ -21,4 +21,5 @@ router.post('/create-session', passport.authenticate(
 const profile=require('./profile')
 router.use('/profile',passport.authenticateUser,profile)
 router.use('/sign-out',signout)
+router.post('/postComment',passport.authenticateUser,data1.post);
 module.exports = router;

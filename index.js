@@ -12,6 +12,7 @@ app.use(expressLayouts)
 app.use(express.static('./static'))
 app.set('layout extractStyles',true);
 const mongoose=require('./models/user.js')
+const posts1=require('./models/post')
 //var ejs = require("ejs");
 var routers = require("./routers/app");
 // app.set('layout','layout')

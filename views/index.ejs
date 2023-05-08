@@ -3,10 +3,22 @@
 <% if(locals.user){ %>
     <h1>My name is <%= user.name %></h1>
     <a href="/profile">profile</a>
+    <a href="/posts">Post a comment</a>
+    <br>
     <a href="/sign-out">signout</a>
+    <% if(posts1) {%>
+        <h1>posts</h1>
+        <% for(let i of posts1) {%>
+        <h2><%= i.content %></h2>
+        <p><%= i.user.name %></p>
+        <% } %>
+           <% } %>
     <% }else{ %>
         <a href="/sign-up">Sign up</a>
-        <a href="/sign-in">sign in</a>
+        <a href="/sign-in">Sign in</a>
+    
+       
+        
         <% } %>
 
    
