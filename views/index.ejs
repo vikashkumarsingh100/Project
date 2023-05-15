@@ -6,11 +6,20 @@
     <a href="/posts">Post a comment</a>
     <br>
     <a href="/sign-out">signout</a>
-    <% if(posts1) {%>
+    <% if(typeof posts1 !="undefined" && posts1) {%>
         <h1>posts</h1>
         <% for(let i of posts1) {%>
         <h2><%= i.content %></h2>
         <p><%= i.user.name %></p>
+       <% if(typeof comment2 != "undefined" && comment2){ %>
+        <h4><%= comment2 %></h4>
+        <form action="/comment" method="post">
+            <textarea name="contentComment" id="" cols="30" rows="10"></textarea>
+            <input type="hidden" name="postId" value="<%= i._id %>">
+            <button type="submit">comment</button>
+        </form>
+        <% } %>
+      
         <% } %>
            <% } %>
     <% }else{ %>

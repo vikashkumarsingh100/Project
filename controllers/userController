@@ -1,14 +1,17 @@
 const users=require('../models/user')
 const posts=require('../models/post')
 const express = require("express");
-
+const comment1=require('../models/comment');
 module.exports.data=async function(req,res){
     // console.log(req.user)
   if(req.user)
-  { var a=await posts.find().populate('user');
-  return res.render('index',{posts1:a})
+  { var a=await posts.find({user:req.user._id}).populate('user');
+//   return res.render('index',{posts1:a})
+  const comment=await comment1.find().populate('user').populate({path:'post',populate:{path:'user'}})
+// console.log(a)
+return res.render('index',{comment2:comment,posts1:a})
   }
-  console.log('comment')
+//   console.log('comment')
 
 return res.render('index');}
    
@@ -35,11 +38,12 @@ user=await users.findOne({email:req.body.email})
 module.exports.post=async function(req,res){
     await posts.create(
         {content:req.body.content,user:req.user._id});
-        var comment=await posts.find({user:req.user._id})
+        // var comment=await posts.find({user:req.user._id})
 
-         var a=await posts.find().populate('user');
-  return res.render('index',{posts1:a})
+        //  var a=await posts.find().populate('user');
+        //    console.log(a)
+  return res.redirect('/');
   
-        // console.log(comment)
+      
    
 }
