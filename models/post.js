@@ -1,4 +1,5 @@
 var mongoose=require('mongoose');
+const comment = require('./comment');
 var schema=new mongoose.Schema({
     content:{
         type:String,
@@ -8,7 +9,13 @@ var schema=new mongoose.Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'users'
-    }
+    },
+    comments:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'comment'
+        }
+    ]
 },{
     timestamps:true
 })

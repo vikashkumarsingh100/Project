@@ -5,11 +5,12 @@ const comment1=require('../models/comment');
 module.exports.data=async function(req,res){
     // console.log(req.user)
   if(req.user)
-  { var a=await posts.find({user:req.user._id}).populate('user');
+  { var a=await posts.find().populate('user').populate({path:'comments',populate:{path:'user'}});
+  // console.log(a);
 //   return res.render('index',{posts1:a})
-  const comment=await comment1.find().populate('user').populate({path:'post',populate:{path:'user'}})
+  // const comment=await comment1.find().populate('user').populate({path:'post',populate:{path:'user'}})
 // console.log(a)
-return res.render('index',{comment2:comment,posts1:a})
+return res.render('index',{posts1:a})
   }
 //   console.log('comment')
 
@@ -46,4 +47,25 @@ module.exports.post=async function(req,res){
   
       
    
+}
+module.exports.removePost=async function(req,res){
+  try{
+    const p1=await posts.findById(req.params.id);
+      if(req.user.id==p1.user._id)
+  {
+    await comment1.deleteMany({post:p1._id})
+    await posts.findOneAndDelete({_id:p1._id})
+    // console.log(p1)
+  }
+}catch(e)
+  {
+    console.log(e)
+  }
+
+
+// if(p1){
+
+//   }
+// }
+res.redirect('back');
 }

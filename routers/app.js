@@ -24,5 +24,6 @@ const profile=require('./profile')
 router.use('/profile',passport.authenticateUser,profile)
 router.use('/sign-out',signout)
 router.post('/postComment',passport.authenticateUser,data1.post);
+router.get('/postComment/:id',passport.authenticateUser,data1.removePost);
 router.post('/comment',passport.authenticateUser,com.comment10)
 module.exports = router;

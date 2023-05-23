@@ -9,16 +9,25 @@
     <% if(typeof posts1 !="undefined" && posts1) {%>
         <h1>posts</h1>
         <% for(let i of posts1) {%>
-        <h2><%= i.content %></h2>
+         
+           <h2>
+            <% if(locals.user.id==i.user._id) { %>
+            <a href="/postComment/<%=i._id%>">x</a>
+            <% } %>
+        <%= i.content %></h2>
         <p><%= i.user.name %></p>
-       <% if(typeof comment2 != "undefined" && comment2){ %>
-        <h4><%= comment2 %></h4>
+        <% for(let k of i.comments) { %>
+        <p><%= k.content %> <small><%= k.user.name %></small></p>
+        
+        <% } %>
+       <!-- <% if(typeof comment2 != "undefined" && comment2){ %>
+        <h4><%= comment2.content %></h4> <% } %> -->
         <form action="/comment" method="post">
             <textarea name="contentComment" id="" cols="30" rows="10"></textarea>
             <input type="hidden" name="postId" value="<%= i._id %>">
             <button type="submit">comment</button>
         </form>
-        <% } %>
+       
       
         <% } %>
            <% } %>
